@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -32,8 +32,13 @@ VAGAS = [{
 
 @app.route('/')
 def hello_world():
-	return render_template("home.html", vagas=VAGAS)
+    return render_template("home.html", vagas=VAGAS)
+
+
+@app.route('/vagas')
+def vagas():
+    return jsonify(VAGAS)
 
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True)
